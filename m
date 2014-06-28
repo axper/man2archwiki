@@ -31,15 +31,6 @@ body {
 	font-variant: normal;
 	font-weight: 400;
 	line-height: 16px;
-	margin-bottom: 7.61667px;
-	margin-left: -154.933px;
-	margin-right: 0px;
-	margin-top: 0px;
-	padding-bottom: 0px;
-	padding-left: 0px;
-	padding-right: 0px;
-	padding-top: 0px;
-	width: 1588px;
 }
 
 .mandoc {
