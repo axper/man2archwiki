@@ -22,7 +22,6 @@ body {
 	background: none repeat scroll 0% 0% #F6F9FC;
 	color: #F9F9F9;
 	direction: ltr;
-	float: right;
 	font-family: sans-serif;
 	font-size: 12.7px;
 	font-size-adjust: none;
