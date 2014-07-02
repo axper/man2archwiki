@@ -350,7 +350,10 @@ HTML_OUTPUT_DECODED = re.sub('<br>',
 HTML_OUTPUT_DECODED = re.sub('<b>[\n]<p>[\n]</b>',
                              '<p>',
                              HTML_OUTPUT_DECODED)
-HTML_OUTPUT_DECODED = re.sub('<b></b>',
+HTML_OUTPUT_DECODED = re.sub('<b>[\n]</b>',
+                             '',
+                             HTML_OUTPUT_DECODED)
+HTML_OUTPUT_DECODED = re.sub('<i>[\n]</i>',
                              '',
                              HTML_OUTPUT_DECODED)
 HTML_OUTPUT_DECODED = re.sub('<dt>[\n]</dt>',
