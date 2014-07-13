@@ -344,9 +344,6 @@ HTML_OUTPUT_DECODED = re.sub('(<h[1-7][^>]*>)(.+)(</h[1-7]>)',
 HTML_OUTPUT_DECODED = re.sub('<div style="height: 1.00em;">',
                              '<div style="height: 0.40em;">',
                              HTML_OUTPUT_DECODED)
-HTML_OUTPUT_DECODED = re.sub('<br>',
-                             '',
-                             HTML_OUTPUT_DECODED)
 HTML_OUTPUT_DECODED = re.sub('<b>[\n]<p>[\n]</b>',
                              '<p>',
                              HTML_OUTPUT_DECODED)
