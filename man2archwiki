@@ -4,11 +4,12 @@
     It uses mandoc (aka mdocml) for HTML convertion.
     The resulting file is then opened in a $BROWSER.
 
-    Required arguments are section number and manpage name, for exmaple:
-        ./<this script> 8 pacman
+    Usage:
+        Pass the section number (optional) and manpage name (required), for example:
 
-    Section number is required because I can't figure out how to specify
-    2 poisitional arguments in argparse, with one of them non-required.
+        man2archwiki 8 pacman
+        or
+        man2archwiki pacman
 '''
 
 import re, argparse, gzip, subprocess, os
@@ -297,16 +298,20 @@ def capitalize_func(match):
 PARSER = argparse.ArgumentParser(description='Convert manpage to HTML and'
                                  'open in browser')
 PARSER.add_argument('manpage_section',
-                    help='the section number of manpage')
+                    help='the section number of manpage',
+                    nargs='?')
 PARSER.add_argument('manpage_name', help='manpage file to parse')
 ARGS = PARSER.parse_args()
 
+
 try:
-    MANPAGE_LOCATIONS = subprocess.check_output(['man',
-                                                 '--where',
-                                                 '--all',
-                                                 ARGS.manpage_section,
-                                                 ARGS.manpage_name])
+    if ARGS.manpage_section is None:
+        man_command = ['man', '--where', '--all', ARGS.manpage_name]
+    else:
+        man_command = ['man', '--where', '--all', ARGS.manpage_section,
+                       ARGS.manpage_name]
+
+    MANPAGE_LOCATIONS = subprocess.check_output(man_command)
 except subprocess.CalledProcessError:
     print('No such manpage found.')
     exit(1)
@@ -323,10 +328,17 @@ TEMP_FILE.close()
 
 FILE_MANPAGE = open(TMP_PREFIX + 'temp_uncompressed_manpage')
 
-FILE_HTML_NAME = TMP_PREFIX + \
-                 os.path.basename(ARGS.manpage_name) + \
-                 '.' + ARGS.manpage_section + \
-                 '.html'
+if ARGS.manpage_section is None:
+    FILE_HTML_NAME = TMP_PREFIX + \
+                     os.path.basename(ARGS.manpage_name) + \
+                     '.' + 'default' + \
+                     '.html'
+else:
+    FILE_HTML_NAME = TMP_PREFIX + \
+                     os.path.basename(ARGS.manpage_name) + \
+                     '.' + ARGS.manpage_section + \
+                     '.html'
+
 FILE_HTML = open(FILE_HTML_NAME, 'w')
 
 HTML_OUTPUT = subprocess.check_output(['mandoc',

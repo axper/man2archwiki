@@ -20,11 +20,17 @@ Then you can run this script:
 </pre>
 For example:
 
-    ./m 8 pacman
+    man2archwiki 8 pacman
+
+or simply:
+
+	man2archwiki pacman
 
 It will open the page in your browser.
 
-The syntax is close to that of `man` command, however the section number is required.
+The syntax is close to that of `man` command: the name is required, but section
+number can be ommited. If ommited, manpage will be searched in the same order as the
+man command does it.
 
 If you are not sure what section a manpage is, you can use `apropos`, for example:
 
