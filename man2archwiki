@@ -5,7 +5,8 @@
     The resulting file is then opened in a $BROWSER.
 
     Usage:
-        Pass the section number (optional) and manpage name (required), for example:
+        Pass the section number (optional) and manpage name (required).
+        For example:
 
         man2archwiki 8 pacman
         or
@@ -306,12 +307,12 @@ ARGS = PARSER.parse_args()
 
 try:
     if ARGS.manpage_section is None:
-        man_command = ['man', '--where', '--all', ARGS.manpage_name]
+        MAN_COMMAND = ['man', '--where', '--all', ARGS.manpage_name]
     else:
-        man_command = ['man', '--where', '--all', ARGS.manpage_section,
+        MAN_COMMAND = ['man', '--where', '--all', ARGS.manpage_section,
                        ARGS.manpage_name]
 
-    MANPAGE_LOCATIONS = subprocess.check_output(man_command)
+    MANPAGE_LOCATIONS = subprocess.check_output(MAN_COMMAND)
 except subprocess.CalledProcessError:
     print('No such manpage found.')
     exit(1)
